@@ -5,32 +5,32 @@ public class Main {
         System.out.println("Hello world!");
 
 
-        final var objOne = new Object();
-        final var objTwo = new Object();
+        final var lockOne = new Object();
+        final var lockTwo = new Object();
 
         new Thread(()->{
-            synchronized (objOne){
+            synchronized (lockOne){
                 try {
                     Thread.sleep(1000);
                 }
                 catch (InterruptedException e){
                     throw new RuntimeException();
                 }
-                synchronized (objTwo){
+                synchronized (lockTwo){
                     System.out.println("both locks acquired");
                 }
             }
 
         }).start();
         new Thread(()->{
-            synchronized (objTwo){
+            synchronized (lockTwo){
                 try {
                     Thread.sleep(1000);
                 }
                 catch (InterruptedException e){
                     throw new RuntimeException();
                 }
-                synchronized (objOne){
+                synchronized (lockOne){
                     System.out.println("both locks acquired");
                 }
             }
